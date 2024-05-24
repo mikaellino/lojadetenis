@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lino Imports</title>
+</head>
+<body class="body">
+    <div class="tittle">
+        <h1>OS TÊNIS IMPORTADOS DE MELHOR QUALIDADE</h1>
+    </div>
+    <img src="img/Lino imports.png" alt="logo Lino Imports" class="logo">
+
+    <!-- Seção de Consentimento de Cookies -->
+    <div id="cookie-consent" class="cookies">
+        <div class="mensagem">
+            <p>Você autoriza o uso de cookies para salvar suas preferências?</p>
+            <button onclick="acceptCookies()">Sim</button>
+            <button onclick="declineCookies()">Não</button>
+        </div>
+    </div>
+
+    <!-- Seção de Lista de Produtos -->
+    <div id="listaProdutos">
+        <h1>Loja de Tênis</h1>
+        <div class="listaTenis">
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox" class="product" value="tenis1">
+                        Tênis Nike Dunk Low "Panda"
+                    </label>
+                    <img src="img/dunk.jpg" alt="Tênis 1" class="panda">
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" class="product" value="tenis2">
+                        Tênis Vans Knu Skool
+                    </label>
+                    <img src="img/knu.jpg" alt="Tênis 2" class="knu">
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" class="product" value="tenis3">
+                        Tênis Adidas Yeezy Boost 350 V2
+                    </label>
+                    <img src="img/yeezy.jpg" alt="Tênis 3">
+                </li>
+            </ul>
+        </div>
+        <button onclick="saveFavorites()">Salvar Favoritos</button> 
+        
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
