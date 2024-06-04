@@ -13,11 +13,11 @@
     <img src="img/Lino imports.png" alt="logo Lino Imports" class="logo">
 
     <!-- Seção de Consentimento de Cookies -->
-    <div id="cookie-consent" class="cookies">
+    <div id="cookie-consent" class="cookies hidden">
         <div class="mensagem">
             <p>Você autoriza o uso de cookies para salvar suas preferências?</p>
-            <button onclick="acceptCookies()">Sim</button>
-            <button onclick="declineCookies()">Não</button>
+            <button id="acceptCookies">Sim</button>
+            <button id="declineCookies">Não</button>
         </div>
     </div>
 
@@ -49,7 +49,7 @@
                 </li>
             </ul>
         </div>
-        <button onclick="saveFavorites()">Salvar Favoritos</button> 
+        <button id="bnt_enviar">Salvar Favoritos</button> 
         
     </div>
     <script src="script.js"></script>

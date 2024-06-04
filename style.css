@@ -1,17 +1,16 @@
-.tittle{
-    text-align: center;
-    font-size: large;
+body {
+    background-color: #ffebcd;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.body{
-    background-color: #ffebcd;
+.tittle {
+    text-align: center;
+    font-size: large;
 }
 
-.logo{
-    position:flex;
-    margin-left: 87%;
-    margin-top: -5%;
+.logo {
+    display: block;
+    margin: 0 auto;
     width: 250px;
     height: 250px;
 }
@@ -57,11 +56,13 @@ h1 {
 ul {
     list-style-type: none;
     padding: 0;
+    text-align: center;
 }
 
 li {
     margin: 10px 0;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -75,16 +76,11 @@ img {
     margin-left: 10px;
 }
 
-.listaTenis{
+.listaTenis {
     text-align: center;
     align-items: center;
-    margin-left: 40%;
 }
 
-.knu{
-    margin-left: 7.5%;
-}
-
-.panda{
-    margin-left: 2.5%;
+.hidden {
+    display: none;
 }

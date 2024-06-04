@@ -1,57 +1,68 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const cookieConsent = getCookie("cookie-consent");
-    
-    if (cookieConsent === "true") {
-        document.getElementById("cookie-consent").style.display = "none";
-        document.getElementById("product-list").style.display = "block";
-        loadFavorites();
-    } else {
-        document.getElementById("cookie-consent").style.display = "flex";
+document.addEventListener('DOMContentLoaded', function() {
+    // Função para obter um cookie pelo nome
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
     }
-});
 
-function acceptCookies() {
-    setCookie("cookie-consent", "true", 365);
-    document.getElementById("cookie-consent").style.display = "none";
-    document.getElementById("product-list").style.display = "block";
-    loadFavorites();
-}
+    // Função para definir um cookie
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            let date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
 
-function declineCookies() {
-    alert("Você precisa aceitar os cookies para salvar seus favoritos.");
-}
+    // Verifica se o usuário já autorizou o uso de cookies
+    let cookie_place = getCookie("cookie_place");
 
-function saveFavorites() {
-    const selectedProducts = document.querySelectorAll(".product:checked");
-    const favoriteProducts = Array.from(selectedProducts).map(product => product.value);
-    setCookie("favorite-products", JSON.stringify(favoriteProducts), 365);
-}
+    if (cookie_place !== "accepted") {
+        let consentElement = document.getElementById('cookie-consent');
+        if (consentElement) {
+            consentElement.classList.remove('hidden');
+        }
+    } else {
+        loadFavorites();
+    }
 
-function loadFavorites() {
-    const favoriteProducts = JSON.parse(getCookie("favorite-products") || "[]");
-    const checkboxes = document.querySelectorAll(".product");
-    
-    checkboxes.forEach(checkbox => {
-        if (favoriteProducts.includes(checkbox.value)) {
-            checkbox.checked = true;
+    document.getElementById('acceptCookies').addEventListener('click', function() {
+        setCookie("cookie_place", "accepted", 365);
+        document.getElementById('cookie-consent').classList.add('hidden');
+        loadFavorites();
+    });
+
+    document.getElementById('declineCookies').addEventListener('click', function() {
+        alert("Você precisa aceitar o uso de cookies para salvar suas preferências.");
+    });
+
+    document.getElementById('bnt_enviar').addEventListener('click', function() {
+        if (getCookie("cookie_place") === "accepted") {
+            saveFavorites();
+        } else {
+            alert("Você precisa aceitar o uso de cookies para salvar suas preferências.");
         }
     });
-}
 
-function setCookie(name, value, days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + date.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-function getCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    function saveFavorites() {
+        let checkboxes = document.querySelectorAll('.product:checked');
+        let favorites = [];
+        checkboxes.forEach(function(checkbox) {
+            favorites.push(checkbox.value);
+        });
+        setCookie("favorites", JSON.stringify(favorites), 365);
+        alert("Preferências salvas!");
     }
-    return null;
-}
+
+    function loadFavorites() {
+        let favorites = JSON.parse(getCookie("favorites") || "[]");
+        let checkboxes = document.querySelectorAll('.product');
+        checkboxes.forEach(function(checkbox) {
+            if (favorites.includes(checkbox.value)) {
+                checkbox.checked = true;
+            }
+        });
+    }
+});
